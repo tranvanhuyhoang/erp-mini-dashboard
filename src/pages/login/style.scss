@@ -1,12 +1,91 @@
-#components-form-demo-normal-login .login-form {
-  max-width: 300px;
+.wrap-form-login{
+  position: relative;
+  height: 100vh;
+  z-index: 0;
+  background-image: url("https://i.imgur.com/Hyfiovq.jpg");
+  background-position: bottom;
+
+  .error-text{
+    color: #c1382f;
+    font-size: 13px;
+    padding-top: 2px;
+  }
+
+  .error-input{
+    border-color: #c1382f !important;
+  }
 }
-#components-form-demo-normal-login .login-form-forgot {
-  float: right;
+
+.frame{
+  width: 560px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3.2rem 0 5.2rem 0;
+  background-color: #fff;
+  box-shadow: 0 0.2rem 0.6rem 0 #d5d9de;
+  max-width: 56rem;
 }
-#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
-  float: left;
+
+.logo{
+  width: 18rem;
+  text-align: center;
+  font-size: 35px; 
+  margin: 0 auto 2.4rem auto;
+  padding: 1rem;
+  color: #ed2049;
 }
-#components-form-demo-normal-login .login-form-button {
+
+.wrap-content{
+  padding: 0 6.6rem;
+}
+
+.wrap-content .wrap-input .wrap-phone-input,
+.wrap-content .wrap-input .wrap-password-input{
   width: 100%;
+  display: block;
+  box-sizing: inherit;
+  margin-bottom: 1.6rem;
 }
+
+.wrap-content .wrap-input input{
+    width: 100%;
+    padding-left: 1.6rem;
+    box-sizing: border-box;
+/*     text-indent: 15px; */
+    font-size: 14px;
+    line-height: 2.4rem;
+    background-color: #fff;
+    border: .1rem solid #d5d9de;
+    border-radius: .4rem;
+    -moz-appearance: textfield;
+    transition: border-color .2s;
+}
+
+.wrap-content .wrap-input input:focus{
+    border-color: rgba(237, 33, 74, 0.5);
+    outline: 0;
+    outline-offset: 0;
+}
+
+// .wrap-content .wrap-button-login button{
+//     display: block;
+//     text-transform: uppercase;
+//     width: 100%;
+//     margin-top: 1.6rem;
+//     color: #fff;
+//     background-color: #ed2049;
+//     border: 0;
+//     padding: .8rem 1.6rem;
+//     font-size: 14px;
+//     line-height: 1.5;
+//     white-space: nowrap;
+//     border-radius: .4rem;
+//     cursor: pointer;
+//     transition: background-color .2s,border .2s;
+// }
+
+// .wrap-content .wrap-button-login button:hover{
+//   background-color: rgba(237, 33, 74, 0.9);
+// }
