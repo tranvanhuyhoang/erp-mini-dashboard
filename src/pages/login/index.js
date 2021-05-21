@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Button from '@bit/tranvanhuyhoang.react-components.button';
-import { ACCESS_TOKEN, USER_INFO } from '../../commons/constants';
-import {isValidPhoneNumber} from '../../utils/checkPhone';
+import { Button } from 'antd';
 import  queryString from 'query-string';
-import { staffLogin } from '../../services/login';
 import get from 'lodash/get';
 import FormError from './formError';
-import jwt_decode from "jwt-decode";
-import { errorAlert } from '../../components/SingleAlertV2';
 import './style.scss';
 
 
@@ -200,7 +195,8 @@ export default class index extends Component {
             
           </div>
           <div className="wrap-button-login">
-            <Button className="w-100" onClick={() => this.loginOwnerShop()}>Đăng nhập</Button>
+            {/* <Button className="w-100" onClick={() => this.loginOwnerShop()}>Đăng nhập</Button> */}
+            <Button className="w-100">Đăng nhập</Button>
           </div>
           </div>
         </div>
