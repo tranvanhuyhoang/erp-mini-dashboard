@@ -1,6 +1,7 @@
 import React, {Suspense} from 'react';
 import routes from './routes';
 import withClearCache from "./clearCache";
+import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

@@ -1,91 +1,51 @@
-.wrap-form-login{
+.wrap-login-page{
   position: relative;
+  background-image: url('../../resources//images/background.jpg');
   height: 100vh;
-  z-index: 0;
-  background-image: url("https://i.imgur.com/Hyfiovq.jpg");
-  background-position: bottom;
+  background-size: contain;
 
-  .error-text{
-    color: #c1382f;
-    font-size: 13px;
-    padding-top: 2px;
+  .wrap-form{
+    width: 350px;
+    position: absolute;
+    right: 0;
+    width: 500px;
+    height: 100vh !important;
+    height: auto;
+    background: #A5B4FC;
+    border-top-left-radius:30px;
+    border-bottom-left-radius: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    .erp-logo{
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .login-form{
+      width: 350px !important;
+      max-width: 350px !important;
+      margin: 0 auto;
+      position: inherit;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
-
-  .error-input{
-    border-color: #c1382f !important;
-  }
 }
 
-.frame{
-  width: 560px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 3.2rem 0 5.2rem 0;
-  background-color: #fff;
-  box-shadow: 0 0.2rem 0.6rem 0 #d5d9de;
-  max-width: 56rem;
+.login-form {
+  max-width: 300px;
 }
-
-.logo{
-  width: 18rem;
-  text-align: center;
-  font-size: 35px; 
-  margin: 0 auto 2.4rem auto;
-  padding: 1rem;
-  color: #ed2049;
+.login-form-forgot {
+  float: right;
 }
-
-.wrap-content{
-  padding: 0 6.6rem;
+.ant-col-rtl .login-form-forgot {
+  float: left;
 }
-
-.wrap-content .wrap-input .wrap-phone-input,
-.wrap-content .wrap-input .wrap-password-input{
+.login-form-button {
   width: 100%;
-  display: block;
-  box-sizing: inherit;
-  margin-bottom: 1.6rem;
 }
-
-.wrap-content .wrap-input input{
-    width: 100%;
-    padding-left: 1.6rem;
-    box-sizing: border-box;
-/*     text-indent: 15px; */
-    font-size: 14px;
-    line-height: 2.4rem;
-    background-color: #fff;
-    border: .1rem solid #d5d9de;
-    border-radius: .4rem;
-    -moz-appearance: textfield;
-    transition: border-color .2s;
-}
-
-.wrap-content .wrap-input input:focus{
-    border-color: rgba(237, 33, 74, 0.5);
-    outline: 0;
-    outline-offset: 0;
-}
-
-// .wrap-content .wrap-button-login button{
-//     display: block;
-//     text-transform: uppercase;
-//     width: 100%;
-//     margin-top: 1.6rem;
-//     color: #fff;
-//     background-color: #ed2049;
-//     border: 0;
-//     padding: .8rem 1.6rem;
-//     font-size: 14px;
-//     line-height: 1.5;
-//     white-space: nowrap;
-//     border-radius: .4rem;
-//     cursor: pointer;
-//     transition: background-color .2s,border .2s;
-// }
-
-// .wrap-content .wrap-button-login button:hover{
-//   background-color: rgba(237, 33, 74, 0.9);
-// }
