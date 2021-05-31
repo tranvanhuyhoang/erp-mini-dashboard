@@ -1,12 +1,17 @@
 import React from 'react';
-import 'antd/dist/antd.css';
 import { withRouter } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Avatar } from 'antd';
+import get from 'lodash/get'
 import {
   UnorderedListOutlined,
-  TeamOutlined
-
+  TeamOutlined,
+  UserOutlined
 } from '@ant-design/icons';
+
+import { USER_INFO } from '../../commons/constant';
+
+import 'antd/dist/antd.css';
 import './style.scss';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -16,11 +21,21 @@ class DefaultLayout extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      infoUser: '',
+      collapsed: false,
+    }
   }
 
-  state = {
-    collapsed: false,
-  };
+  componentDidMount = () => {
+    if (localStorage.getItem(USER_INFO)) {
+      let infoUser = '';
+      infoUser = JSON.parse(localStorage.getItem(USER_INFO));
+      this.setState({
+        infoUser
+      })
+    }
+  }
 
   onCollapse = collapsed => {
     console.log(collapsed);
@@ -51,8 +66,15 @@ class DefaultLayout extends React.Component {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
+          <Header 
+          className="site-layout-background" 
+          style={{ padding: 0 }} 
+          />
           <Content style={{ margin: '0 16px' }}>
+            <div className="wrap-avatar">
+              <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', textTransform: 'uppercase' }}>{get(this.state.infoUser, 'name', '').charAt(0)}</Avatar>
+              <span className="ml-2">{get(this.state.infoUser, 'name', '')}</span>
+            </div>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>

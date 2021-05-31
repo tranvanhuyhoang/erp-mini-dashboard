@@ -1,31 +1,59 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
+
+import { ACCESS_TOKEN, REFRESH_TOKEN, USER_INFO } from '../../commons/constant';
+import { login } from '../../services/auth';
+
 import './style.scss';
 
-const NormalLoginForm = () => {
-  const onFinish = () => {
-    console.log('Received values of form: ');
+export default function NormalLoginForm(){
+  let history = useHistory();
+
+  async function OnLogin(values){
+    try {
+      const response = await login({
+        email: values.email,
+        password: values.password 
+      });
+
+      if(!response.data.status){
+        return;
+      }
+
+      let data = response.data.data;
+      let JWTDecode = jwt_decode(data.token);
+      localStorage.setItem(USER_INFO, JSON.stringify(JWTDecode.data));
+      localStorage.setItem(ACCESS_TOKEN, data.token);
+      localStorage.setItem(REFRESH_TOKEN, data.refreshToken); 
+      history.push("/");
+
+    } catch (error) {
+      
+    }
   };
+
 
   return (
     <div className="wrap-login-page">
       <div className="wrap-form">
-        <h2 className="erp-logo">ERP MINI</h2>
+        <h2 className="erp-logo">ERP <small>Small</small></h2>
         <Form
           name="normal_login"
           className="login-form"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
+          onFinish={OnLogin}
         >
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            name="email"
+            rules={[{ required: true, message: 'Vui lòng nhập email' }]}
           >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your Password!' }]}
+            rules={[{ required: true, message: 'Vui lòng nhập password' }]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -44,7 +72,7 @@ const NormalLoginForm = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button type="primary" className="login-form-button" htmlType="submit">
               Log in
             </Button>
             Or <a href="">register now!</a>
@@ -54,5 +82,3 @@ const NormalLoginForm = () => {
     </div>
   );
 };
-
-export default NormalLoginForm;

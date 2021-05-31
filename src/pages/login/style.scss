@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Almarai-Bold;
+  src: url('../../font/almarai/Almarai-Bold.ttf');
+}
+
 .wrap-login-page{
   position: relative;
   background-image: url('../../resources//images/background.jpg');
@@ -23,6 +28,7 @@
       transform: translate(-50%, -50%);
       color: #fff;
       font-weight: bold;
+      font-family: Almarai-Bold;
     }
 
     .login-form{
