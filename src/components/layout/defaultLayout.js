@@ -1,15 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Tooltip } from 'antd';
 import { Avatar } from 'antd';
 import get from 'lodash/get'
 import {
   UnorderedListOutlined,
   TeamOutlined,
-  UserOutlined
+  UserOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
 
-import { USER_INFO } from '../../commons/constant';
+import { USER_INFO, ACCESS_TOKEN, REFRESH_TOKEN } from '../../commons/constant';
 
 import 'antd/dist/antd.css';
 import './style.scss';
@@ -47,6 +48,13 @@ class DefaultLayout extends React.Component {
     else{this.props.history.push(`/${e.key}`)}
   };
 
+  onLogout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(USER_INFO);
+    localStorage.removeItem(REFRESH_TOKEN);
+    this.props.location.push('/');
+  };
+
   render() {
     const { collapsed } = this.state;
     return (
@@ -75,6 +83,9 @@ class DefaultLayout extends React.Component {
               <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', textTransform: 'uppercase' }}>{get(this.state.infoUser, 'name', '').charAt(0)}</Avatar>
               <span className="ml-2">{get(this.state.infoUser, 'name', '')}</span>
             </div>
+            <Tooltip title="Đăng xuất" placement="leftTop">
+              <LogoutOutlined className="log-out-icon" onClick={() => this.onLogout()}/>
+            </Tooltip>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
