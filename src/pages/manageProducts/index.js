@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
 import { Table, Tag, Space } from 'antd';
+
 import ModalAddStudent from './addStudent';
+import {getListProducts} from '../../services/products'; 
+
 import './style.scss';
 
 export default class ManageStudents extends Component {
-  render() {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      products: [],
+    }
+  }
+
+  componentDidMount = () => {
+    this.getListProducts();
+  }
+
+  getListProducts  = async() => {
+    const response = await getListProducts();
+    if(response.data.status){
+      this.setState({
+        products: response.data.data
+      })
+    }
+  }
+
+  render() {
     const columns = [
       {
         title: 'Ảnh SP',

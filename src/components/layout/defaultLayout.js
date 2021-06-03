@@ -29,6 +29,11 @@ class DefaultLayout extends React.Component {
   }
 
   componentDidMount = () => {
+    if (!localStorage.getItem(ACCESS_TOKEN)){
+      this.props.history.push('/login');
+      return;
+    }
+
     if (localStorage.getItem(USER_INFO)) {
       let infoUser = '';
       infoUser = JSON.parse(localStorage.getItem(USER_INFO));
@@ -52,7 +57,7 @@ class DefaultLayout extends React.Component {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(USER_INFO);
     localStorage.removeItem(REFRESH_TOKEN);
-    this.props.location.push('/');
+    this.props.history.push('/login');
   };
 
   render() {

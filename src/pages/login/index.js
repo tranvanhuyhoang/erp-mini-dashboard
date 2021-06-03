@@ -9,6 +9,12 @@ import { login } from '../../services/auth';
 import './style.scss';
 
 export default function NormalLoginForm(){
+
+  constructor(props);
+  this.state = {
+    
+  }
+
   let history = useHistory();
 
   async function OnLogin(values){
@@ -67,15 +73,15 @@ export default function NormalLoginForm(){
             </Form.Item>
 
             <a className="login-form-forgot" href="">
-              Forgot password
+              Quên mật khẩu
             </a>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" className="login-form-button" htmlType="submit">
-              Log in
+            <Button type="primary" className="login-form-button" htmlType="submit" loading>
+              Đăng nhập
             </Button>
-            Or <a href="">register now!</a>
+            Or <a href="">Đăng ký ngay!</a>
           </Form.Item>
         </Form>
     </div>
