@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
@@ -10,12 +11,9 @@ import './style.scss';
 
 export default function NormalLoginForm(){
 
-  constructor(props);
-  this.state = {
-    
-  }
-
+  const [loadingLogin, setLoadingLogin] = useState(false);
   let history = useHistory();
+
 
   async function OnLogin(values){
     try {
@@ -78,7 +76,7 @@ export default function NormalLoginForm(){
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" className="login-form-button" htmlType="submit" loading>
+            <Button type="primary" className="login-form-button" htmlType="submit" loading={loadingLogin}>
               Đăng nhập
             </Button>
             Or <a href="">Đăng ký ngay!</a>
