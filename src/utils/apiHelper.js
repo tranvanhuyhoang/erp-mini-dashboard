@@ -21,7 +21,7 @@ const fetch = async (endpoint, config, authenticate, props) => {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    
+    'x-access-token': token,
     'app-id': `${APP_ID}`,
   };
   const { method = 'GET', headers, data } = config;
@@ -77,6 +77,7 @@ const uploadFile = async (endpoint, data) => {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'multipart/form-data',
     'Access-Control-Allow-Origin': '*',
+    'x-access-token': token,
     // 'app-id': `${APP_ID}`,
   };
   try {
