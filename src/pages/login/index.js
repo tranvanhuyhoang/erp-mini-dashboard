@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Modal } from 'antd';
 import { UserOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
@@ -14,6 +14,12 @@ export default function NormalLoginForm(){
   const [loadingLogin, setLoadingLogin] = useState(false);
   let history = useHistory();
 
+  function error(content) {
+    Modal.error({
+      title: 'Thông báo hệ thống',
+      content,
+    });
+  }
 
   async function OnLogin(values){
     try {
@@ -23,6 +29,7 @@ export default function NormalLoginForm(){
       });
 
       if(!response.data.status){
+        error(response.data.message);
         return;
       }
 
@@ -43,6 +50,51 @@ export default function NormalLoginForm(){
     <div className="wrap-login-page">
       <div className="wrap-form">
         <h2 className="erp-logo">ERP <small>Small</small></h2>
+
+
+        {/* <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={OnLogin}
+        >
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: 'Vui lòng nhập email' }]}
+          >
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          </Form.Item>
+          
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Vui lòng nhập password' }]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Vui lòng nhập password' }]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+         
+
+          <Form.Item>
+            <Button type="primary" className="login-form-button" htmlType="submit" loading={loadingLogin}>
+              Đăng ký
+            </Button>
+          </Form.Item>
+        </Form> */}
+
         <Form
           name="normal_login"
           className="login-form"

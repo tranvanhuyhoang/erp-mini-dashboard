@@ -78,7 +78,7 @@ const uploadFile = async (endpoint, data) => {
     'Content-Type': 'multipart/form-data',
     'Access-Control-Allow-Origin': '*',
     'x-access-token': token,
-    // 'app-id': `${APP_ID}`,
+    'app-id': `${APP_ID}`,
   };
   try {
     const instance = axios.create({

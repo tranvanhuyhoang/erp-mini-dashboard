@@ -86,34 +86,86 @@ export default class ManageLesson extends Component {
         key: 'listProductsBought',
         dataIndex: 'listProductsBought',
       },
+      {
+        title: 'Ngày mua',
+        key: 'dayBuy',
+        dataIndex: 'dayBuy',
+      },
     ];
 
     const data = [
       {
         key: '1',
-        name: 'John Brown',
-        phone: "hioho",
-        dayOfBirth: 'New York No. 1 Lake Park',
-        countOrder: 10,
-        listProductsBought: 'Curnon, casio, neiko',
+        name: 'Hoàng Trần',
+        phone: "0327375733",
+        dayOfBirth: '20/01/1998',
+        countOrder: 1,
+        listProductsBought: 'Curnon-v1',
+        dayBuy: '20/01/2021'
       },
       {
         key: '2',
-        name: 'John Brown',
-        phone: "hioho",
-        dayOfBirth: 'New York No. 1 Lake Park',
-        countOrder: 10,
-        listProductsBought: 'Curnon, casio, neiko',
+        name: 'Phát Nguyễn',
+        phone: "0327375731",
+        dayOfBirth: '13/01/2000',
+        countOrder: 2,
+        listProductsBought: 'Curnon-v2, Curnon-v3',
+        dayBuy: '12/01/2021'
       },
       {
         key: '3',
-        name: 'John Brown',
-        phone: "hioho",
-        dayOfBirth: 'New York No. 1 Lake Park',
-        countOrder: 10,
-        listProductsBought: 'Curnon, casio, neiko',
+        name: 'Nhàn Lê',
+        phone: "0392379743",
+        dayOfBirth: '30/06/2001',
+        countOrder: 20,
+        listProductsBought: 'Curnon-v1',
+        dayBuy: '20/11/2021'
       },
-
+      {
+        key: '4',
+        name: 'Chiến Nguyễn',
+        phone: "0392379741",
+        dayOfBirth: '25/02/1996',
+        countOrder: 120,
+        listProductsBought: 'Curnon-v2',
+        dayBuy: '12/04/2021'
+      },
+      {
+        key: '5',
+        name: 'Hoàng Trần',
+        phone: "0327375733",
+        dayOfBirth: '20/01/1998',
+        countOrder: 1,
+        listProductsBought: 'Curnon-v1',
+        dayBuy: '20/01/2021'
+      },
+      {
+        key: '6',
+        name: 'Phát Nguyễn',
+        phone: "0327375731",
+        dayOfBirth: '13/01/2000',
+        countOrder: 2,
+        listProductsBought: 'Curnon-v2, Curnon-v3',
+        dayBuy: '12/01/2021'
+      },
+      {
+        key: '7',
+        name: 'Nhàn Lê',
+        phone: "0392379743",
+        dayOfBirth: '30/06/2001',
+        countOrder: 20,
+        listProductsBought: 'Curnon-v1',
+        dayBuy: '20/11/2021'
+      },
+      {
+        key: '8',
+        name: 'Chiến Nguyễn',
+        phone: "0392379741",
+        dayOfBirth: '25/02/1996',
+        countOrder: 120,
+        listProductsBought: 'Curnon-v2',
+        dayBuy: '12/04/2021'
+      },
     ];
 
     return (
@@ -124,9 +176,9 @@ export default class ManageLesson extends Component {
           handleCancel={this.cancelModalAddLesson}
         />
 
-        <div className="row m-0 mb-3">
+        {/* <div className="row m-0 mb-3">
           <Button type="primary" className="ml-auto" onClick={this.openModalAddLesson}>+ Thêm học viên</Button>
-        </div>
+        </div> */}
         
         <Table columns={columns} dataSource={data} />
       </div>

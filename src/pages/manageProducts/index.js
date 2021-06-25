@@ -3,7 +3,8 @@ import { Table, Space, Button, Popconfirm, message } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined} from '@ant-design/icons';
 
 
-import ModalAddStudent from './addStudent';
+import ModalAddProduct from './addProduct';
+import ModalEditProduct from './editProduct';
 import {deleteProduct, getListProducts} from '../../services/products'; 
 
 import './style.scss';
@@ -14,7 +15,9 @@ export default class ManageStudents extends Component {
     super(props);
     this.state = {
       products: [],
+      productActive: '',
       openModalAddProduct: false,
+      openModalEditProduct: false,
     }
   }
 
@@ -47,6 +50,18 @@ export default class ManageStudents extends Component {
     })
   }
 
+  handleOpenModalEditProduct = (productActive) => {
+    this.setState({
+      openModalEditProduct: true,
+      productActive
+    })
+  }
+
+  handleCloseModalEditProduct = () => {
+    this.setState({
+      openModalEditProduct: false,
+    })
+  }
 
   confirmDeleteProduct = (id) => {
     this.deleteProductInList(id);
@@ -89,18 +104,25 @@ export default class ManageStudents extends Component {
         key: 'action',
         render: (data) => (
           <Space size="middle">
-             <Button type="primary" className="d-flex" icon={<EditOutlined className="align-self-center"/>}>Sửa</Button>
+            <Button 
+            type="primary" 
+            className="d-flex" 
+            icon={<EditOutlined className="align-self-center"/>}
+            onClick={() => this.handleOpenModalEditProduct(data)}
+            >
+              Sửa
+            </Button>
 
-             <Popconfirm
-                id={data._id}
-                title="Bạn muốn xóa sản phẩm này?"
-                onConfirm={() => this.confirmDeleteProduct(data.id)}
-                onCancel={this.cancelDeleteProduct}
-                okText="Xóa"
-                cancelText="Đóng"
-              >
-                <Button danger className="d-flex" icon={<DeleteOutlined className="align-self-center"/>}>Xóa</Button>
-              </Popconfirm>
+            <Popconfirm
+              id={data._id}
+              title="Bạn muốn xóa sản phẩm này?"
+              onConfirm={() => this.confirmDeleteProduct(data.id)}
+              onCancel={this.cancelDeleteProduct}
+              okText="Xóa"
+              cancelText="Đóng"
+            >
+              <Button danger className="d-flex" icon={<DeleteOutlined className="align-self-center"/>}>Xóa</Button>
+            </Popconfirm>
           </Space>
         ),
       },  
@@ -132,10 +154,24 @@ export default class ManageStudents extends Component {
             Thêm sản phẩm
           </Button>
         </div>
-        <ModalAddStudent
+
+        {
+          this.state.openModalAddProduct &&
+          <ModalAddProduct
           isModalVisible={this.state.openModalAddProduct}
           handleCancel={this.handleModalAddProduct}
-        />
+          />
+        }
+
+        {
+          this.state.openModalEditProduct &&
+          <ModalEditProduct
+            isModalVisible={this.state.openModalEditProduct}
+            handleCancel={this.handleCloseModalEditProduct}
+            product={this.state.productActive}
+          />
+        }
+
         <Table columns={columns} dataSource={data} />
       </div>
     );

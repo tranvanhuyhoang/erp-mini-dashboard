@@ -4,3 +4,11 @@
   object-fit: cover;
 
 }
+
+.wrap-modal-edit-product{
+  .row-image-product{
+    .ant-form-item-label{
+      align-self: center;
+    }
+  }
+}
