@@ -80,7 +80,7 @@ class DefaultLayout extends React.Component {
         </Sider>
         <Layout className="site-layout">
           <Header 
-          className="site-layout-background" 
+          className="header-background" 
           style={{ padding: 0 }} 
           />
           <Content style={{ margin: '0 16px' }}>
@@ -91,11 +91,11 @@ class DefaultLayout extends React.Component {
             <Tooltip title="Đăng xuất" placement="leftTop">
               <LogoutOutlined className="log-out-icon" onClick={() => this.onLogout()}/>
             </Tooltip>
-            <Breadcrumb style={{ margin: '16px 0' }}>
+            {/* <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-            <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+            </Breadcrumb> */}
+            <div className="" style={{ padding: 24, minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>

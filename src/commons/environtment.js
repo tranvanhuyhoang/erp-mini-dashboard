@@ -5,6 +5,9 @@ const api = {
   getListProduct: API + 'product',
   deleteProduct: API + 'product/',
 
+  //customer
+  getListCustomers: API + 'customer',
+
 }
 
 export default api; 
