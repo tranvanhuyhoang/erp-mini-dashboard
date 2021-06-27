@@ -6,6 +6,30 @@
   }
 }
 
+.wrap-select-time{
+
+  .box-month{
+    padding: 8px 2px;
+    margin: 4px;
+    width: 80px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #b3b3b3;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .box-month:hover{
+    border-color: #1890FF !important;
+  }
+
+  .month-active{
+    border-color: #1890FF !important;
+    color: #fff !important;
+    background: #1890FF;
+    
+  }
+}
 
 //------------------ css for tab of ant.design
 .card-container p {

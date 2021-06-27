@@ -144,7 +144,7 @@ export default class ManageStudents extends Component {
     
     return (
       <div className="wrap-manage-student">
-        <div className="row m-0 d-flex justify-content-end mt-3 mb-3">
+        <div className="row m-0 d-flex justify-content-end mb-2">
           <Button 
           className="justify-content-end d-flex align-self-center" 
           type="primary" 

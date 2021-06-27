@@ -7,6 +7,7 @@ const api = {
 
   //customer
   getListCustomers: API + 'customer',
+  getListCustomersCare: API + 'customer/get-birth-day-customer'
 
 }
 

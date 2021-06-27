@@ -7,6 +7,12 @@ export const getListCustomers = () => {
   
 };
 
+export const getListCustomersCare = (data) => {
+  const url = api.getListCustomersCare;
+  return callApi.get(url, data);
+  
+};
+
 // export const deleteProduct = (idProduct) => {
 //   const url = api.deleteProduct+idProduct;
 //   return callApi.del(url);

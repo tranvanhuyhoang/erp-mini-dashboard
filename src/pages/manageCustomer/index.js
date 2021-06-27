@@ -9,7 +9,7 @@ import moment from 'moment';
 
 import TableCareCustomer from './careCustomer';
 import ModalAddLesson from './addLesson';
-import { getListCustomers } from '../../services/customer';
+import { getListCustomers, getListCustomersCare } from '../../services/customer';
 
 import './style.scss';
 
@@ -21,11 +21,17 @@ export default class ManageLesson extends Component {
     this.state={
       openModalAddLesson: false,
       listCustomers: '',
+
+      //mage care customer
+      listCustomersCare: '',
+      monthCareActive: moment(new Date()).month()+1,
     }
   }
 
   componentDidMount = () => {
+    console.log("monthCareActive ", this.state.monthCareActive);
     this.handleGetListCustomer();
+    this.handleGetListCustomerCare()
   }
 
   openModalAddLesson = () => {
@@ -45,6 +51,16 @@ export default class ManageLesson extends Component {
     if(response.data.status){
       this.setState({
         listCustomers: response.data.data,
+      })
+    }
+  }
+
+  handleGetListCustomerCare = async(month=this.state.monthCareActive) => {
+    const response = await getListCustomersCare({month});
+    if(response.data.status){
+      this.setState({
+        monthCareActive: month,
+        listCustomersCare: response.data.data,
       })
     }
   }
@@ -112,12 +128,40 @@ export default class ManageLesson extends Component {
         key: 'dayBuy',
         dataIndex: 'dayBuy',
       },
+      {
+        title: 'Action',
+        key: 'action',
+        dataIndex: 'action',
+        render: (data) => (
+          <Space size="middle">
+            <Button 
+            // type="primary" 
+            className="d-flex" 
+            onClick={() => this.handleOpenModalEditProduct(data)}
+            >
+              Báo xấu
+            </Button>
+
+            {/* <Popconfirm
+              id={data._id}
+              title="Bạn muốn xóa sản phẩm này?"
+              onConfirm={() => this.confirmDeleteProduct(data.id)}
+              onCancel={this.cancelDeleteProduct}
+              okText="Xóa"
+              cancelText="Đóng"
+            >
+              <Button danger className="d-flex" icon={<DeleteOutlined className="align-self-center"/>}>Xóa</Button>
+            </Popconfirm>*/}
+          </Space>
+        ),
+      },
     ];
 
     let data = [];
 
     if(this.state.listCustomers){
       for(let customer of this.state.listCustomers){
+        console.log("customer ", customer)
         data.push(
           {
             key: get(customer,'_id',''),
@@ -148,7 +192,11 @@ export default class ManageLesson extends Component {
                 }
               </TabPane>
               <TabPane tab="Chăm sóc khách hàng" key="care-customer-tab">
-                <TableCareCustomer data={this.state.listCustomers}/>
+                <TableCareCustomer 
+                data={this.state.listCustomersCare}
+                monthCareActive={this.state.monthCareActive}
+                getListCustomerCare={(month) => this.handleGetListCustomerCare(month)}
+                />
               </TabPane>
             </Tabs>
           </div>
