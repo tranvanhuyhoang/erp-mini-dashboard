@@ -40,7 +40,6 @@ export default class ModalAddStudent extends Component {
         <Form.Item
           label="Tên SP"
           name="name"
-          rules={[{ required: true, message: 'Please input your name!' }]}
         >
         <Input />
         </Form.Item>
@@ -48,14 +47,20 @@ export default class ModalAddStudent extends Component {
         <Form.Item
           label="Loại"
           name="type"
-          rules={[{ required: true, message: 'Please input your type!' }]}
         >
         <Input />
         </Form.Item>
 
         <Form.Item
           label="Tổng SL"
-          name="total_count"
+          name="total"
+        >
+        <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="SL bán"
+          name="totalSold"
         >
         <Input />
         </Form.Item>

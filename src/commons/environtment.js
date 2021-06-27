@@ -2,8 +2,11 @@ export const API = 'http://localhost:5035/';
 
 const api = {
   login: API + 'api/login',
+
+  //product
   getListProduct: API + 'product',
   deleteProduct: API + 'product/',
+  updateProduct: API + 'product/',
 
   //customer
   getListCustomers: API + 'customer',

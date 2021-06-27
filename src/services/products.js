@@ -11,3 +11,9 @@ export const deleteProduct = (idProduct) => {
   const url = api.deleteProduct+idProduct;
   return callApi.del(url);
 };
+
+export const updateProduct = (data) => {
+  const url = api.updateProduct+data.idProduct;
+  return callApi.put(url, data);
+};
+

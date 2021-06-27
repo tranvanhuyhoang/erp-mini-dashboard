@@ -10,7 +10,8 @@ export default class ModalEditStudent extends Component {
   }
 
   onFinish = (data) => {
-    console.log("data ", data )
+    Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
+    this.props.uploadProductInList(data);
   }
 
   render() {
@@ -23,12 +24,13 @@ export default class ModalEditStudent extends Component {
     const tailLayout = {
       wrapperCol: { offset: 8, span: 16 },
     };
-    console.log("this.props ", this.props)
+    
     return (
       <>
         <Modal 
         title="Sửa sản phấm" 
         className="wrap-modal-edit-product"
+        footer={false}
         visible={this.props.isModalVisible} 
         onOk={this.props.handleOk} 
         onCancel={this.props.handleCancel}
@@ -76,7 +78,7 @@ export default class ModalEditStudent extends Component {
 
         <Form.Item
           label="Tổng SL"
-          name="total_count"
+          name="total"
           dataIndex={this.props.product.total}
         >
         <Input defaultValue={this.props.product.total}/>
@@ -84,8 +86,8 @@ export default class ModalEditStudent extends Component {
 
         <Form.Item
           label="Đã bán"
-          key="bought"
-          name="bought"
+          key="totalSold"
+          name="totalSold"
           dataIndex={this.props.product.totalSold}
         >
         <Input defaultValue={this.props.product.totalSold}/>

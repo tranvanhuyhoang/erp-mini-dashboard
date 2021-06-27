@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Space, Button, Popconfirm, message } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import get from 'lodash/get';
 
 
 import ModalAddProduct from './addProduct';
 import ModalEditProduct from './editProduct';
-import {deleteProduct, getListProducts} from '../../services/products'; 
+import {deleteProduct, getListProducts, updateProduct} from '../../services/products'; 
 
 import './style.scss';
 
@@ -44,6 +45,18 @@ export default class ManageStudents extends Component {
     }
   }
 
+  uploadProductInList = async (data) => {
+    data.idProduct = this.state.productActive.id;
+    const response = await updateProduct(data);
+    if(response.data.success){
+        message.success(response.data.message);
+        this.handleCloseModalEditProduct();
+        this.getListProducts();
+    }else{
+      message.error(response.data.message);
+    }
+  }
+
   handleModalAddProduct = () => {
     this.setState({
       openModalAddProduct: !this.state.openModalAddProduct,
@@ -72,6 +85,7 @@ export default class ManageStudents extends Component {
   }
 
   render() {
+    console.log("productActive ", this.state.productActive);
     const columns = [
       {
         title: 'Ảnh SP',
@@ -167,12 +181,17 @@ export default class ManageStudents extends Component {
           this.state.openModalEditProduct &&
           <ModalEditProduct
             isModalVisible={this.state.openModalEditProduct}
-            handleCancel={this.handleCloseModalEditProduct}
             product={this.state.productActive}
+            uploadProductInList={(data) => this.uploadProductInList(data)}
+            handleCancel={this.handleCloseModalEditProduct}
           />
         }
 
-        <Table columns={columns} dataSource={data} />
+        <Table 
+        columns={columns} 
+        dataSource={data} 
+        loading={data.length > 0 ? false : true}
+        />
       </div>
     );
   }
