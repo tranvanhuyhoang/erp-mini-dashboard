@@ -1,8 +1,18 @@
-import React, { Component } from 'react';
-import { Modal, Button, Upload, Form, Input } from 'antd';
-import {UploadOutlined} from '@ant-design/icons';
+import React, { Component, Fragment } from 'react';
+import { Modal, Button, Upload, Form, Input, message } from 'antd';
+import {UploadOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
+import get from 'lodash/get';
 
 export default class ModalAddStudent extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      avatar: '',
+      errMessage: '',
+      upAvatar: '',
+    }
+  }
 
   render() {
     
@@ -29,12 +39,32 @@ export default class ModalAddStudent extends Component {
           // onFinish={onFinish}
           // onFinishFailed={onFinishFailed}
         >
-        
+
         <Form.Item
           label="Hình SP"
           name="image"
         >
-        <Button icon={<UploadOutlined />}>Tải hình ảnh lên</Button>
+          <div className="wrap-form-avatar d-flex justify-content-center">
+            {
+              !this.props.avatarProductDisplay ?
+              <form encType="multipart/form-data" className="wrap-image-avatar align-self-center">
+                <input type="file" id="file" name="file" onChange={this.props.changeAvatar}/>
+                <label htmlFor="file" className="choose-image"><PlusOutlined className="d-flex justify-content-center"/> Upload</label>
+              </form> 
+              :
+              <div>
+              <div className="wrap-image-avatar align-self-center" onClick={this.props.changeAvatar}>
+                <input type="file" id="file" name="file" onChange={this.props.changeAvatar}/>
+                <img src={this.props.avatarProductDisplay} alt="cannot display" className="avatar-custom"/>
+              </div>
+              {/* <form encType="multipart/form-data" className="wrap-image-avatar align-self-center">
+                <input type="file" id="file" name="file" onChange={this.props.changeAvatar}/>
+                <label htmlFor="file" className="choose-image"><PlusOutlined className="d-flex justify-content-center"/> Thay đổi</label>
+              </form>  */}
+              </div>
+            }
+
+          </div>
         </Form.Item>
 
         <Form.Item

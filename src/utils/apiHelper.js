@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import url from 'url';
 // import { APP_ID } from '../commons/constants';
-// import { logout } from '../utils/authenticate';
+import { logout } from '../services/auth';
 import { ACCESS_TOKEN, APP_ID } from '../commons/constant';
 import getData from 'lodash/get';
 
@@ -37,9 +37,9 @@ const fetch = async (endpoint, config, authenticate, props) => {
 
     return response;
   } catch (error) {
-    // if (getData(error, 'response.status', '') == 401 ) {
-    //   logout();
-    // }
+    if (getData(error, 'response.status', '') == 401 ) {
+      logout();
+    }
     
     throw  getData(error, 'response');
   }
@@ -91,9 +91,9 @@ const uploadFile = async (endpoint, data) => {
     });
     return response;
   } catch (error) {
-    // if (getData(error, 'response.status', '') == 401 ) {
-    //   logout();
-    // }
+    if (getData(error, 'response.status', '') == 401 ) {
+      logout();
+    }
     throw  getData(error, 'response');
   }
 }

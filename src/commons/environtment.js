@@ -4,6 +4,7 @@ const api = {
   login: API + 'api/login',
 
   //product
+  addProduct: API + 'product',
   getListProduct: API + 'product',
   deleteProduct: API + 'product/',
   updateProduct: API + 'product/',

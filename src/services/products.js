@@ -4,7 +4,11 @@ import api from '../commons/environtment';
 export const getListProducts = () => {
   const url = api.getListProduct;
   return callApi.get(url);
-  
+};
+
+export const addProduct = (data) => {
+  const url = api.addProduct;
+  return callApi.uploadFile(url, data);
 };
 
 export const deleteProduct = (idProduct) => {

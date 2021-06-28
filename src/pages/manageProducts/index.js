@@ -6,7 +6,7 @@ import get from 'lodash/get';
 
 import ModalAddProduct from './addProduct';
 import ModalEditProduct from './editProduct';
-import {deleteProduct, getListProducts, updateProduct} from '../../services/products'; 
+import {addProduct, deleteProduct, getListProducts, updateProduct} from '../../services/products'; 
 
 import './style.scss';
 
@@ -19,6 +19,9 @@ export default class ManageStudents extends Component {
       productActive: '',
       openModalAddProduct: false,
       openModalEditProduct: false,
+      avatarProductDisplay: '',
+      avatarProductFileUpload: '',
+      errMessageUploadAvatarUploadAvatar: '',
     }
   }
 
@@ -57,6 +60,60 @@ export default class ManageStudents extends Component {
     }
   }
 
+  changeAvatar = (e) => {
+    console.log("e ", e)
+    let _validFileExtensions = [".jpg", ".jpeg", ".png"]; 
+    let check = false;
+    let nameFile = get(e, 'target.files[0].name');   
+
+    if(nameFile){
+        for (let destination of _validFileExtensions){
+            let nameLowerCase = nameFile.toLowerCase();
+            if(nameLowerCase.endsWith(destination) == true){
+                check = true;
+                break;
+            }
+        }
+    }
+
+    if(check == true){
+        if(e.target.files){
+            let result = [];
+            for(let image of e.target.files){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                  result.push(e.target.result);
+                  this.setState({
+                    avatarProductDisplay: result,
+                    errMessageUploadAvatar: '',
+                  });
+                };
+                reader.readAsDataURL(image);
+            }
+        }
+        this.setState({avatarProductFileUpload: get(e, 'target.files[0]')})
+    } else {
+        this.setState({
+            errMessageUploadAvatar: "Vui lòng chọn ảnh có định dạng: .JPG, .JPEG, .PNG"
+        })
+    }
+  }
+
+  uploadAvatarProduct = async() => {
+    const formData  = new FormData();
+    formData.append('avatar', this.state.avatarProduct); 
+    
+    try {
+        const response = await addProduct(formData);
+        if(!response.data.status){
+            return;
+        }
+        this.getBannerCategoryUpload();
+    } catch (error) {
+        this.props.appStore.alert.error('Đã có lỗi xảy ra, vui lòng thực hiện lại thao tác!');
+    }
+  }
+
   handleModalAddProduct = () => {
     this.setState({
       openModalAddProduct: !this.state.openModalAddProduct,
@@ -85,7 +142,6 @@ export default class ManageStudents extends Component {
   }
 
   render() {
-    console.log("productActive ", this.state.productActive);
     const columns = [
       {
         title: 'Ảnh SP',
@@ -174,6 +230,8 @@ export default class ManageStudents extends Component {
           <ModalAddProduct
           isModalVisible={this.state.openModalAddProduct}
           handleCancel={this.handleModalAddProduct}
+          changeAvatar={this.changeAvatar}
+          avatarProductDisplay={this.state.avatarProductDisplay}
           />
         }
 
